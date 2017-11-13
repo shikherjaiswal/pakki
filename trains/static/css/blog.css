@@ -19,18 +19,16 @@ h1 a {
 content container{
     text-align:center;
     align:center;
+    margin:5px;
+    float:left;
 
 }
 
 .page-header{
 
 }
-body {
 
-}
-.post-form{
 
-}
 save btn btn-default{
 
 }
@@ -40,34 +38,37 @@ body {
     text-align:center;
     align:center;
 }
-label,input {
- display: block;
+input {
  width: 150px;
- float: left;
  margin-bottom: 10px;
  padding:8px
+ float:left;
 }
 
 label {
  text-align: center;
- text-align: right;
+ text-align:right;
  width: 75px;
- padding-right: 20px;
+ padding-right: 10px;
 }
 
 br {
  clear: left;
 }
 
-
 #bottom {
+
+    text-align:center;
     position: fixed;
     left: 0;
     right: 0;
     height: 50%;
-}
-
-#bottom {
-    bottom: 0;
+    bottom: 10;
     background-color:  #e7e7e7;
 }
+#post-form{
+    margin-top: 20cm;
+    text-align:center;
+    float:left;
+}
+

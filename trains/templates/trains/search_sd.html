@@ -4,6 +4,7 @@
 
    <div id="bottom">
     <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.media }}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Search</button>
     </form>

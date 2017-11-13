@@ -33,6 +33,7 @@ class TrainsInfo(forms.Form):
     source = forms.CharField(label = 'From',max_length=200)
     destination = forms.CharField(label = 'To',max_length=200)
     date = forms.DateField(widget = SelectDateWidget())
+    #date = forms.DateField(widget=AdminDateWidget)
     cl = forms.CharField(label ='Class',widget = forms.Select(choices = CLASS_CHOICE))
     quota = forms.CharField(label = 'Quota' ,widget =forms.Select(choices = QUOTA_CHOICE) )
     class Meta:
@@ -45,7 +46,7 @@ class TrainRoute(forms.Form):
 
 
 class LiveTrain(forms.Form):
-    train_number = forms.CharField(max_length=200)
+    train_number = forms.CharField(label ='TRAIN No.',max_length=200)
     date = forms.DateField(widget = SelectDateWidget())
     #date = forms.DateField(widget = AdminDateWidget)
    # date = forms.DateField(input_formats=['%d-%m-%Y'])
@@ -54,6 +55,6 @@ class LiveTrain(forms.Form):
 
 
 class PnrStatus(forms.Form):
-    pnr_number = forms.CharField(max_length=200)
+    pnr_number = forms.CharField(label ='PNR No.',max_length=200)
     class Meta:
         fields = ('pnr_number')
