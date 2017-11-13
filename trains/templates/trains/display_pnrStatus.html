@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PNR STATUS</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/button.css' %}">
+</head>
+<body>
+    <h2> <b>PNR Search Results</b></h2>
+    <p> FOR : {{pnr}} </p>
+    <br><br>
+    <div>
+        <table style="width:100%">
+            <caption>JOURNEY DETAILS</caption>
+            <tr>
+                <th>Train.No</th>
+                <th>Train Name</th>
+                <th>Date of Journey</th>
+                <th>Boarding point</th>
+                <th>To Station</th>
+
+                <th>Class</th>
+            </tr>
+
+            <tr>
+            <th>{{train.number}}</th>
+            <th>{{train.name}}</th>
+                <th>{{doj}}</th>
+                <th>{{bpt.name}}</th>
+                <th>{{to.name}}</th>
+                <th>{{quota.code}}</th>
+            </tr>
+        </table>
+         <table style="width:100%">
+             <caption>Passenger Details</caption>
+            <tr>
+                <th>Sr.No</th>
+                <th>Booking Status</th>
+                <th>Current Status</th>
+            </tr>
+           {% for value in passenger_list %}
+            <tr>
+                <th>{{value.no}}</th>
+                <th>{{value.booking_status}}</th>
+                <th>{{value.current_status}}</th>
+            </tr>
+            {% endfor %}
+         </table>
+
+    </div>
+    <h4>Charting Status :{{charting_status}}</h4>
+    </body>
+</html>

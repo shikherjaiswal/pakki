@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/button.css' %}">
+    </head>
+    <body>
+    <h2> <b>Search Results</b></h2>
+    <p> Train Name : {{train_name.name}} <br>   Train Number : {{train_name.number}}</p>
+    <br><br>
+    <div>
+        <table style="width:100%">
+            <caption>Route</caption>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Scheduled Arrival</th>
+                <th>Scheduled Dept.</th>
+                <th>Actual Arrival</th>
+                <th>Actual Dept.</th>
+                <th>Arrival Date</th>
+                <th>Late By (mins)</th>
+            </tr>
+        {% for value in train_route %}
+            <tr>
+            <th>{{value.no}}</th>
+            <th>{{value.station.name}}</th>
+                <th>{{value.scharr}}</th>
+                <th>{{value.schdep}}</th>
+                <th>{{value.actarr}}</th>
+                <th>{{value.actdep}}</th>
+                <th>{{value.actarr_date}}</th>
+                <th>{{value.latemin}}</th>
+            </tr>
+
+        {% endfor %}
+        </table>
+    </div>
+    <h4>{{train_position}}</h4>
+    </body>
+
+</html>

@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    </head>
+    <body>
+    <h2> <b>Search Results</b></h2>
+
+    <br><br>
+    <div>
+        <table style="width:100%">
+
+            <tr>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Class</th>
+                <th>Quota</th>
+                <th>Date</th>
+                <th>Availability</th>
+            </tr>
+
+            {%for item in trains%}
+            <tr>
+                <th>{{item.0}}</th>
+                <th>{{item.1}}</th>
+                <th>{{cl}}</th>
+                <th>{{quota}}</th>
+                <th>{{date}}</th>
+                <th>{{item.2}}</th>
+            </tr>
+
+            {%endfor%}
+
+        </table>
+    </div>
+    </body>
+
+</html>

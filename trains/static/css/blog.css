@@ -1,0 +1,73 @@
+  table, th, td {
+             border: 1px solid black;
+             border-collapse: collapse;
+            }
+
+  th, td {
+          padding: 5px;
+          text-align: left;
+          }
+h1 a {
+    color: #0000FF;
+    font-family: 'Lobster';
+    background-color:#00ffbf;
+    color: black;
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 14px 40px;
+}
+content container{
+    text-align:center;
+    align:center;
+
+}
+
+.page-header{
+
+}
+body {
+
+}
+.post-form{
+
+}
+save btn btn-default{
+
+}
+body {
+    background-color: powderblue;
+    margin:0px 0px; padding:0px;
+    text-align:center;
+    align:center;
+}
+label,input {
+ display: block;
+ width: 150px;
+ float: left;
+ margin-bottom: 10px;
+ padding:8px
+}
+
+label {
+ text-align: center;
+ text-align: right;
+ width: 75px;
+ padding-right: 20px;
+}
+
+br {
+ clear: left;
+}
+
+
+#bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 50%;
+}
+
+#bottom {
+    bottom: 0;
+    background-color:  #e7e7e7;
+}
