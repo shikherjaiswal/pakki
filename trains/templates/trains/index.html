@@ -14,16 +14,19 @@
     </head>
     <body>
         <div class="page-header">
-            <h1><a href="{% url 'trains:search_sd' %}">Search train between Stations</a>
+            <h1>
+            <a href="{% url 'trains:search_sd' %}">Search train between Stations</a>
             <a href="{% url 'trains:search_train' %}">Train Route</a>
             <a href="{% url 'trains:live_train' %}">Live Train Status</a>
-            <a href="{% url 'trains:pnrStatus' %}">PNR Status</a></h1>
+            <a href="{% url 'trains:pnrStatus' %}">PNR Status</a>
+            <a href="{% url 'trains:fareEnquiry' %}">Train Fare Enquiry</a>
+            </h1>
         </div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
                     {% block content %}
-
+                    {% csrf_token %}
                     {% endblock %}
                 </div>
             </div>

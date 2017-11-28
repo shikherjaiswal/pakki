@@ -1,12 +1,29 @@
 {% extends 'trains/index.html' %}
-
 {% block content %}
 
    <div id="bottom">
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.media }}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Search</button>
+    <form method="POST" class="post-form" runat="server" onsubmit="ShowLoading()">{% csrf_token %}
+         <div id="form_bottom">
+            {{ form.media }}
+            {{ form.as_p }}
+         </div>
+        <button type="submit" class="savebtn-default">Search</button>
     </form>
    </div>
+
+    <script type="text/javascript">
+    function ShowLoading(e) {
+        var div = document.createElement('div');
+        var img = document.createElement('img');
+        img.src = 'loading-bar.gif';
+        img.alt = "Please wait";
+        div.innerHTML = "Loading...<br />";
+        div.style.cssText = 'position: fixed; top: 50%; left: 40%; z-index: 5000; width: 422px; text-align: center; background: #D3D3D3; border: 1px solid #000';
+        div.appendChild(img);
+        document.body.appendChild(div);
+        return true;
+    }
+    </script>
+
 {% endblock %}
+

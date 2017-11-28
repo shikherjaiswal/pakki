@@ -1,0 +1,54 @@
+{% extends 'trains/base_visitor.html' %}
+{% block title %}Signup{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<div id="bottom">
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div id = "bar"> <h2> <a>Sign up </a></h2>  </div>
+
+                  <form class="form-horizontal" role="form"  method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+
+                      <div class="form-group">
+                        <label class="control-label col-sm-2">
+                          {{ field.label_tag }}
+                        </label>
+                        <div class="col-sm-10">
+                         {{ field }}
+                        </div>
+                      </div>
+
+                      {% if field.help_text %}
+                        <small style="display: none">{{ field.help_text }}</small>
+                      {% endif %}
+                      {% for error in field.errors %}
+                         <p style="color: red">{{ error }}</p>
+                      {% endfor %}
+
+                    {% endfor %}
+
+                    <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                    </div>
+                  </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

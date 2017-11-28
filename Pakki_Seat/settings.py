@@ -17,8 +17,8 @@ ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, us
 # Email settings for sending accout activation mails
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "user@example.com"
-EMAIL_HOST_PASSWORD = "secret"
+EMAIL_HOST_USER = "pakkiseatiitrpr@gmail.com"
+EMAIL_HOST_PASSWORD = "pakkiseat"
 EMAIL_PORT = 587
 
 
@@ -41,6 +41,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
     'trains.apps.TrainsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,6 +130,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'

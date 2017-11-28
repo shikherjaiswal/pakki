@@ -3,7 +3,11 @@
 {% block content %}
  <div id="bottom">
     <form method="POST" class="post-form">{% csrf_token %}
+
+        <div id="form_bottom">
         {{ form.as_p }}
+        </div>
+
         <button type="submit" class="save btn btn-default">Search</button>
     </form>
  </div>

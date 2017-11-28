@@ -1,8 +1,11 @@
+{% extends 'trains/base.html' %}
+{% block title %}Pnr Status{% endblock %}
+{% block body %}
 {% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PNR STATUS</title>
+    <title>Pnr Status</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -54,3 +57,4 @@
     <h4>Charting Status :{{charting_status}}</h4>
     </body>
 </html>
+{% endblock %}

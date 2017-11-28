@@ -1,0 +1,65 @@
+{% extends 'trains/base.html' %}
+{% block title %}Fare Enquiry{% endblock %}
+{% block body %}
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+          <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    </head>
+    <body>
+    <h2> <b>Fare Enquiry</b></h2>
+
+    <br><br>
+    <div>
+        <table style="width:100%">
+
+            <tr>
+                <th>Train Name</th>
+                <th>Train No.</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Class</th>
+                <th>Quota</th>
+                <th>Date</th>
+            </tr>
+
+
+            <tr>
+                <th>{{train_detail.name}}</th>
+                <th>{{train_detail.number}}</th>
+                <th>{{from.name}}</th>
+                <th>{{to.name}}</th>
+                <th>{{cl}}</th>
+                <th>{{quota}}</th>
+                <th>{{date}}</th>
+            </tr>
+            </table>
+            <table style="width:100%">
+                    <tr>
+                    <th>Class Name</th>
+                    <th>Class Code</th>
+                    <th>Fare</th>
+                    </tr>
+                <tr>
+                {%for item in fare%}
+                <tr>
+                <th>{{item.0}}</th>
+                <th>{{item.1}}</th>
+                <th>{{item.2}}</th>
+                </tr>
+
+            {%endfor%}
+            </tr>
+
+            </table>
+
+
+    </div>
+    </body>
+
+</html>
+{% endblock %}

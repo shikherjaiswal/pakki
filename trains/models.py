@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.conf import settings
 
 class Station(models.Model):
+    objects = models.Manager()
     name = models.CharField(max_length = 100)
     code = models.CharField(max_length = 10)
 

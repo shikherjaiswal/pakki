@@ -1,0 +1,10 @@
+{% extends 'trains/base_visitor.html' %}
+{% block title %}Log In{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<h1>
+    {{msg}} Click <a href="{% url 'trains:index' %}">here</a> to continue.
+</h1>
+{% endblock %}

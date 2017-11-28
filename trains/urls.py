@@ -16,16 +16,22 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from . import views
+from .views import StationAutocomplete
 
 app_name = 'trains'
 
 urlpatterns = [
-    url(r'^/search/sd/$', views.search_sd, name='search_sd'),
-    url(r'^/search/train/$', views.search_train, name='search_train'),
-    url(r'^/live/train/$', views.live_train, name='live_train'),
-    url(r'^/pnrStatus/train/$', views.pnrStatus, name='pnrStatus'),
+    url(r'^search/sd/$', views.search_sd, name='search_sd'),
+    url(r'^search/train/$', views.search_train, name='search_train'),
+    url(r'^live/train/$', views.live_train, name='live_train'),
+    url(r'^pnrStatus/train/$', views.pnrStatus, name='pnrStatus'),
+    url(r'^fareEnquiry/train/$', views.fareEnquiry, name='fareEnquiry'),
     url(r'^$', views.index, name = 'index'),
-    url(r'^register/$', views.UserFormView.as_view(), name='user-register'),
+    #url(r'^register/$', views.UserFormView.as_view(), name='user-register'),
     url(r'^login/$', views.login_view , name = 'user-login'),
     url(r'^logout/$', views.logout_view, name='user-logout'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
+    url(r'^station-autocomplete/$', views.StationAutocomplete.as_view(), name='station-autocomplete'),
 ]

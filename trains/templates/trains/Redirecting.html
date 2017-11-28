@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv= "content-type" content = "text/html; charset= utf-8"/>
+		<link rel = "stylesheet" href = "test.css"> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 		crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div style='position:absolute;z-index:5;top:45%;left:45%;'>
+    		<img id="imgAjax" alt="loading..." title="loading..." src="ajax-loading.gif" style="width: 100%; height:100%" />
+    		<br /> 
+    		<br />
+ 		</div>
+ 		<script type="text/javascript">
+    		/* <![CDATA[ */
+    		this.focus(); //focus on new window 
+
+    		redirect = function() {
+        		var querystring = window.location.search.substring(1); //first query string
+        		var page = querystring.substring(querystring.indexOf('=') + 1, querystring.length);
+        		function toPage() {
+            		if (page !== undefined && page.length > 1) {
+                		document.write('<!--[if !IE]>--><head><meta http-equiv="REFRESH" content="1;url=' + page + '" /><\/head><!--<![endif]-->');
+                		document.write(' \n <!--[if IE]>');
+                		document.write(' \n <script type="text/javascript">');
+                		document.write(' \n var version = parseInt(navigator.appVersion);');
+                		document.write(' \n if (version>=4 || window.location.replace) {');
+                		document.write(' \n window.location.replace("' + page + '");');
+                		document.write(' document.images["imgAjax"].src="ajax-loading.gif"');
+                		document.write(' \n } else');
+                		document.write(' \n window.location.href="' + page + '";');
+                		document.write(' \n  <\/script> <![endif]-->');
+            		}
+        		}
+        	return {
+            begin: toPage
+        }
+    } ();
+    redirect.begin();
+</script>  
+	</body>
+</html>

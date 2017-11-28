@@ -2,14 +2,18 @@
 {% block title %}Log In{% endblock %}
 
 {% block body %}
- <div id="bottom">
+
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+<div id="bottom">
 <div class="container-fluid">
 
     <div class="row">
+
         <div class="col-sm-12 col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Log In</h3>
+                    <div id = "bar" > <h2> <a>Log In</a></h2> </div>
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
@@ -39,13 +43,13 @@
                     </form>
                 </div>
                 <div class="panel-footer">
-                    Don't have an account? <a href="{% url 'trains:user-register' %}">Click here</a> to Register.
+                    Don't have an account? <a href="{% url 'trains:signup' %}">Click here</a> to Register.
                 </div>
             </div>
         </div>
     </div>
 
 </div>
- </div>
+</div>
 
 {% endblock %}

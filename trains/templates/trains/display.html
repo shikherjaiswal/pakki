@@ -1,7 +1,10 @@
+{% extends 'trains/base.html' %}
+{% block title %}Availability{% endblock %}
+{% block body %}
 {% load staticfiles %}
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
-        <title>Results</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -9,6 +12,13 @@
 
     </head>
     <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    {% if num_trains == 0 %}
+        <h1>No Direct Trains between source and destination.</h1>
+
+    {% else %}
+
     <h2> <b>Search Results</b></h2>
 
     <br><br>
@@ -22,6 +32,7 @@
                 <th>Quota</th>
                 <th>Date</th>
                 <th>Availability</th>
+                <th>Alternative </th>
             </tr>
 
             {%for item in trains%}
@@ -32,12 +43,190 @@
                 <th>{{quota}}</th>
                 <th>{{date}}</th>
                 <th>{{item.2}}</th>
+
+         <th>
+
+            <!-- Trigger/Open The Modal
+             <button id={{item.2}}>Get Alternative</button>
+
+             <p> {{item.5}} </p> -->
+
+             <button id ={{item.1}} onclick="myFunction('{{api}}','{{src}}','{{item.1}}','{{cl}}','{{quota}}','{{date}}','{{dest}}','{{item.3}}','{{item.5}}','{{item.2}}','{{item.6}}','{{src_name}}')" > Get Alternative</button>
+
+            <!-- <button id={{item.2}} onClick="reply_click(this.id)">Get Alternative</button> -->
+        </th>
             </tr>
 
             {%endfor%}
 
         </table>
     </div>
+
+
+     <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+               <p>Pakki Search : <a id="myLink"> </a> </p>
+              </div>
+
+            </div>
+
+             <script type="text/javascript">
+                 function ShowLoading(e) {
+
+                    var div = document.createElement('div');
+                    var img = document.createElement('img');
+                    img.src = 'loading-bar.gif';
+                    img.alt = "Please wait";
+                    div.innerHTML = "Loading...<br />";
+                    div.style.cssText = 'position: fixed; top: 50%; left: 40%; z-index: 5000; width: 422px; text-align: center; background: #D3D3D3; border: 1px solid #000;display :'+e+';';
+                    div.appendChild(img);
+                    document.body.appendChild(div);
+                }
+           /* Note : below variable contains information of trains , use to make http url and call the API  */
+                    var trNo , cl , quota , date , src , dest , num_stations , stations ,currtAvl,api , stnName,src_name;
+                    var srcStnName,bestStnName;
+
+                var url;
+              function myFunction(fapi,fsrc,ftrNo,fcl,fquota,fdate,fdest,fnum_stations,fstations ,fcurrtAvl,fstnName,fsrc_name) {
+                          stnName = fstnName.split(",");
+                          srcStnName = fsrc_name;
+                          console.log(fsrc_name);
+                          console.log(srcStnName);
+                          api  = fapi;
+                          src = fsrc;
+                           trNo = ftrNo;
+                           cl = fcl;
+                           quota = fquota;
+                           date = fdate;
+                           dest = fdest;
+                           num_stations = fnum_stations;
+                           currtAvl = fcurrtAvl;
+                           stations = fstations.split(",");
+
+                             console.log(stations);
+                             console.log(stnName);
+                            //console.log(stations[2]);
+
+
+                        }
+                        function equals(bestStnName,srcStnName,arg)
+                        {
+                                        if(bestStnName.toUpperCase() == srcStnName.toUpperCase())
+                                        {
+                                          arg = "All Back Stations have same Waiting List ";
+                                        }
+                                        return arg;
+                        }
+
+                    function compare(a, b) {
+                            console.log(a+ " a");
+                            console.log(b+" b");
+                            if((a[0].indexOf("WL") >=0 && b[0].indexOf("AVAILABLE")>=0))
+                                return b;
+                            else if ((b[0].indexOf("WL") >=0 && a[0].indexOf("AVAILABLE")>=0))
+                              return a;
+                            else if ((b[0].indexOf("WL") >=0 && a[0].indexOf("WL")>=0))
+                            {
+                              var id1 = b[0].lastIndexOf("WL");
+                              var id2 = a[0].lastIndexOf("WL");
+                              var av1 = parseInt(b[0].substring(id1+2));    // taking out availability of b
+                              var av2 = parseInt(a[0].substring(id2+2));    // taking out availability of a
+                              if(av1 <= av2)
+                              {
+                                return b;
+                              }
+                              else 
+                              {
+                                return a;
+                              }
+
+                            }
+                            else
+                            {
+                              return b; // as we will call in such a way second is the best option
+                            }
+                          }
+                    var avl = "";
+                    var modal = document.getElementById('myModal');
+                    var span = document.getElementsByClassName("close")[0];
+                    $( document ).ready(function() {
+
+                                     $("button").click(function() {
+                                        //ShowLoading();
+                                        trNo = this.id;
+
+                                        var pakki = [[currtAvl , src , srcStnName]];
+                                        for(var i = stations.length-2; i>=0;i--){
+
+                                         //console.log(i+" index" + " " +stations[i]);
+                                        url = "http://api.railwayapi.com/v2/check-seat/train/";
+                                        url = url + trNo + "/source/"+ stations[i]+"/dest/"+dest+"/date/"+date+"/class/"+cl+"/quota/"+quota+"/apikey/"+api+"/";
+                                         
+                                       //console.log(url);
+                                        $.ajax({
+                                            async: false,
+                                            url:url,
+                                            method : 'GET',
+                                            success:function(result){
+          
+                                                var rslt = result["availability"][0]["status"];
+                                               // avl = avl + "<br>" + rslt +" " +stations[i] ;
+                                                pakki.push([rslt , stations[i] ,stnName[i]]);
+                              
+                                            },
+                                            failure:function(result){
+                                              console.log("ERROR");
+
+                                            },
+                                            error:function(result){
+                                              console.log("trapped in error");
+                                            }
+                                        });
+                                        
+                                          }
+                                  
+                                       //pakki.push([currtAvl , src]);  
+                                       console.log(pakki);
+                                       var bestOption = pakki[pakki.length-1];
+                                       for (var i = pakki.length-1;i>=0;i--)
+                                       {
+                                        bestOption = compare(bestOption,pakki[i]);
+                                        console.log(bestOption+" at iteration "+i);
+                                       }   
+                                        var arg = "Better Availability at that Station is : " +bestOption[0];
+                                        bestStnName = bestOption[2];
+
+                                        arg = equals(bestStnName,srcStnName,arg);
+
+                                        document.getElementById("myLink").innerHTML = "<br>Book from "+bestStnName+" and choose boarding point as "+srcStnName + "<br>"+arg;
+                                        modal.style.display = "block";
+                                        });
+
+
+                    });
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+
+                ShowLoading("none");
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    ShowLoading("none");
+                    modal.style.display = "none";
+                }
+            }
+
+            </script>
+    {% endif %}
     </body>
 
 </html>
+{% endblock %}
